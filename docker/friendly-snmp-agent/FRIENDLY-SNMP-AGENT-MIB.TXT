@@ -1,0 +1,65 @@
+--
+-- This is FriendlySNMP FRIENDLY-SNMP-AGENT-MIB
+--
+
+FRIENDLY-SNMP-AGENT-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+    enterprises, MODULE-IDENTITY, OBJECT-TYPE FROM SNMPv2-SMI
+    DisplayString, TEXTUAL-CONVENTION FROM SNMPv2-TC;
+
+-- Module Identity
+------------------
+friendlySnmpAgent MODULE-IDENTITY
+    -- Date Format is "YYYYMMDDhhmmZ"
+    LAST-UPDATED "202208310000Z"
+    ORGANIZATION "https://github.com/microprograms"
+    CONTACT-INFO "microprograms@126.com"
+    DESCRIPTION  "SNMP Agent"
+    -- Multiple pairs revision/description allowed
+    REVISION     "202208310000Z"
+    DESCRIPTION  "SNMP Agent"
+    -- 1.3.6.1.4.1.29091.10
+    ::= { friendlySNMP 10 }
+
+-- Enterprise OIDs
+------------------
+friendlySNMP OBJECT IDENTIFIER ::= { enterprises 29091 }
+
+-- Top-level tree (sections)
+----------------------------
+friendlySnmpAgentMIBObjects OBJECT IDENTIFIER ::= { friendlySnmpAgent }
+
+-- Scalar GET values
+--------------------
+coredns OBJECT-TYPE
+    SYNTAX DisplayString MAX-ACCESS read-only STATUS current
+    DESCRIPTION "CoreDNS Status"
+    ::= { friendlySnmpAgentMIBObjects 1 1 }
+
+tidb OBJECT-TYPE
+    SYNTAX DisplayString MAX-ACCESS read-only STATUS current
+    DESCRIPTION "TiDB Status"
+    ::= { friendlySnmpAgentMIBObjects 3 1 }
+
+rabbitmq OBJECT-TYPE
+    SYNTAX DisplayString MAX-ACCESS read-only STATUS current
+    DESCRIPTION "RabbitMQ Status"
+    ::= { friendlySnmpAgentMIBObjects 3 2 }
+
+redis OBJECT-TYPE
+    SYNTAX DisplayString MAX-ACCESS read-only STATUS current
+    DESCRIPTION "Redis Status"
+    ::= { friendlySnmpAgentMIBObjects 3 3 }
+
+mongodb OBJECT-TYPE
+    SYNTAX DisplayString MAX-ACCESS read-only STATUS current
+    DESCRIPTION "MongoDB Status"
+    ::= { friendlySnmpAgentMIBObjects 3 4 }
+
+gateway OBJECT-TYPE
+    SYNTAX DisplayString MAX-ACCESS read-only STATUS current
+    DESCRIPTION "auth-local Status"
+    ::= { friendlySnmpAgentMIBObjects 4 1 }
+
+END
